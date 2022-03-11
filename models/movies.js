@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../config/databaseConfig')
+const categories = require('./category.js')
 
 const movies = db.define('movies',
     {   
@@ -24,10 +25,16 @@ const movies = db.define('movies',
         note: {
             type: Sequelize.INTEGER,
             allowNull:false
+        },
+        category_id: {
+            type: Sequelize.STRING,
+            allowNull: false
         }
     }, {
         timestamps: false,
     }
     )
+
+    movies.belongsTo(categories)
 
 module.exports = movies
